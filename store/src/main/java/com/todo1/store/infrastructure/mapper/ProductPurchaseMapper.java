@@ -2,6 +2,7 @@ package com.todo1.store.infrastructure.mapper;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -30,11 +31,11 @@ public class ProductPurchaseMapper {
         return productPurchaseDTO;
     }
 
-    public List<ProductPurchase> productsDTOToProducts(List<ProductPurchaseDTO> productsPurchaseDTO) {
+    public Set<ProductPurchase> productsPurchaseDTOToProductsPurchase(Set<ProductPurchaseDTO> productsPurchaseDTO) {
         return productsPurchaseDTO.stream()
             .filter(Objects::nonNull)
             .map(this::productPurchaseDTOToProductPurchase)
-            .collect(Collectors.toList());
+            .collect(Collectors.toSet());
     }
 
     public ProductPurchase productPurchaseDTOToProductPurchase(ProductPurchaseDTO productPurchaseDTO) {

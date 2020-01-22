@@ -65,10 +65,10 @@ public class SaleServiceImpl implements SaleService {
         for(ProductSale productSale : sale.getProductSales()) {
             productSale.setSale(sale);
             productSaleRepository.save(productSale);
-            
+
             Stock stock = stockRepository.findByProduct_Id(productSale.getProduct().getId());
             stock.setAmount(calculateAmount(stock.getAmount(), productSale.getAmount()));
-            
+
             stockRepository.save(stock);
         }
 

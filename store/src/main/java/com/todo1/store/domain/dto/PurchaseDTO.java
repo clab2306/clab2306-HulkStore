@@ -1,6 +1,7 @@
 package com.todo1.store.domain.dto;
 
 import java.time.Instant;
+import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
@@ -18,6 +19,8 @@ public class PurchaseDTO {
 
     @NotNull
     private Instant purchaseDate;
+
+    private Set<ProductPurchaseDTO> products;
 
     private Long userId;
 
@@ -52,5 +55,14 @@ public class PurchaseDTO {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    public Set<ProductPurchaseDTO> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductPurchaseDTO> products) {
+        this.products = products;
+    }
+
 
 }

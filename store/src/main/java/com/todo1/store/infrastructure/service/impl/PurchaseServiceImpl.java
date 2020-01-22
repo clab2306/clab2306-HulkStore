@@ -8,10 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.todo1.store.domain.dto.PurchaseDTO;
+import com.todo1.store.domain.dto.SaleDTO;
 import com.todo1.store.domain.service.PurchaseService;
+import com.todo1.store.infrastructure.entity.ProductPurchase;
+import com.todo1.store.infrastructure.entity.ProductSale;
 import com.todo1.store.infrastructure.entity.Purchase;
+import com.todo1.store.infrastructure.entity.Sale;
+import com.todo1.store.infrastructure.entity.Stock;
+import com.todo1.store.infrastructure.mapper.ProductPurchaseMapper;
 import com.todo1.store.infrastructure.mapper.PurchaseMapper;
+import com.todo1.store.infrastructure.repository.ProductPurchaseRepository;
 import com.todo1.store.infrastructure.repository.PurchaseRepository;
+import com.todo1.store.infrastructure.repository.StockRepository;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -31,9 +39,19 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     private final PurchaseMapper purchaseMapper;
 
-    public PurchaseServiceImpl(PurchaseRepository purchaseRepository, PurchaseMapper purchaseMapper) {
+    private final ProductPurchaseMapper productPurchaseMapper;
+
+    private final ProductPurchaseRepository productPurchaseRepository;
+
+    private final StockRepository stockRepository;
+
+    public PurchaseServiceImpl(PurchaseRepository purchaseRepository, PurchaseMapper purchaseMapper,
+            ProductPurchaseMapper productPurchaseMapper, ProductPurchaseRepository productPurchaseRepository,StockRepository stockRepository) {
         this.purchaseRepository = purchaseRepository;
         this.purchaseMapper = purchaseMapper;
+        this.productPurchaseMapper = productPurchaseMapper;
+        this.productPurchaseRepository = productPurchaseRepository;
+        this.stockRepository = stockRepository;
     }
 
     /**
@@ -46,8 +64,22 @@ public class PurchaseServiceImpl implements PurchaseService {
     public PurchaseDTO save(PurchaseDTO purchaseDTO) {
         log.debug("Solicitud para guardad Purchase : {}", purchaseDTO);
         Purchase purchase = purchaseMapper.purchaseDTOToPurchase(purchaseDTO);
+        purchase.setProductPurchases(productPurchaseMapper.productsPurchaseDTOToProductsPurchase(purchaseDTO.getProducts()));
         purchase = purchaseRepository.save(purchase);
+        
+        for (ProductPurchase productPurchase : purchase.getProductPurchases()) {
+            productPurchase.setPurchase(purchase);
+            productPurchaseRepository.save(productPurchase);
+
+            Stock stock = stockRepository.findByProduct_Id(productPurchase.getProduct().getId());
+            stock.setAmount(calculateAmount(stock.getAmount(), productPurchase.getAmount()));
+
+            stockRepository.save(stock);
+        }
         return purchaseMapper.purchaseToPurchaseDTO(purchase);
+    }
+    private Long calculateAmount(Long amountStock, Long amountProduct) {
+        return amountStock + amountProduct;
     }
 
     /**

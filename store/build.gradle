@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.2.3.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'net.ltgt.apt' version '0.20'
 	id 'java'
 	id 'war'
 }
@@ -21,6 +22,10 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"// https://mvnrepository.com/artifact/org.zalando/problem-spring-web
+	compile group: 'org.zalando', name: 'problem-spring-web', version: '0.24.0'
+
 }
 
 test {

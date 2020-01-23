@@ -59,7 +59,7 @@ public class SaleServiceImpl implements SaleService {
     public SaleDTO save(SaleDTO saleDTO) {
         log.debug("Solicitud para guardar Sale : {}", saleDTO);
         Sale sale = saleMapper.saleDTOToSale(saleDTO);
-        sale.setProductSales(productSaleMapper.productsSaleDTOToProductsSale(saleDTO.getProducts()));
+        sale.setProductSales(productSaleMapper.productsSaleDTOToProductsSale(saleDTO.getProductSales()));
         sale = saleRepository.save(sale);
         
         for(ProductSale productSale : sale.getProductSales()) {

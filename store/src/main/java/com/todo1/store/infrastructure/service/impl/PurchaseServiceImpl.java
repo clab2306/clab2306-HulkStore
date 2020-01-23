@@ -64,7 +64,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public PurchaseDTO save(PurchaseDTO purchaseDTO) {
         log.debug("Solicitud para guardad Purchase : {}", purchaseDTO);
         Purchase purchase = purchaseMapper.purchaseDTOToPurchase(purchaseDTO);
-        purchase.setProductPurchases(productPurchaseMapper.productsPurchaseDTOToProductsPurchase(purchaseDTO.getProducts()));
+        purchase.setProductPurchases(productPurchaseMapper.productsPurchaseDTOToProductsPurchase(purchaseDTO.getProductPurchases()));
         purchase = purchaseRepository.save(purchase);
         
         for (ProductPurchase productPurchase : purchase.getProductPurchases()) {

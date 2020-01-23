@@ -18,5 +18,7 @@ public interface StockService {
 
     Optional<StockDTO> findOne(Long id);
 
+    StockDTO findByProductId(Long productId);
+    
     void delete(Long id);
 }

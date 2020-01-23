@@ -1,0 +1,14 @@
+header {
+    margin: 15px auto;
+}
+.logo{
+    margin-left: 20px;
+    border-right: 1px solid #a1a1a1;
+    padding-right: 15px;
+}
+span.title-general {
+    font-size: 22px;
+    color: #4d4d4d;
+    top: 15px;
+    position: relative;
+}

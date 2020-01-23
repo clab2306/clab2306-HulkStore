@@ -23,7 +23,7 @@ public class SaleDTO {
 
     private Long userId;
 
-    private Set<ProductSaleDTO> products;
+    private Set<ProductSaleDTO> productSales;
 
     public Long getId() {
         return id;
@@ -57,12 +57,12 @@ public class SaleDTO {
         this.userId = userId;
     }
 
-    public Set<ProductSaleDTO> getProducts() {
-        return products;
+    public Set<ProductSaleDTO> getProductSales() {
+        return productSales;
     }
 
-    public void setProducts(Set<ProductSaleDTO> products) {
-        this.products = products;
+    public void setProductSales(Set<ProductSaleDTO> products) {
+        this.productSales = products;
     }
 
 }

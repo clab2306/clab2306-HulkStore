@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.todo1.store.domain.dto.StockDTO;
@@ -13,6 +14,9 @@ import com.todo1.store.infrastructure.entity.User;
 
 @Service
 public class StockMapper {
+    
+    @Autowired
+    private ProductMapper productMapper;
 
     public List<StockDTO> stockToStockDTOs(List<Stock> stocks) {
         return stocks.stream()
@@ -24,10 +28,12 @@ public class StockMapper {
     public StockDTO stockToStockDTO(Stock stock) {
         StockDTO stockDTO = new StockDTO();
         stockDTO.setId(stock.getId());
-        stockDTO.setAmount(stock.getId());
+        stockDTO.setAmount(stock.getAmount());
         stockDTO.setProductId(stock.getProduct().getId());
         stockDTO.setUpdateDate(stock.getUpdateDate());
         stockDTO.setUpdateUserId(stock.getUpdateUser().getId());
+        stockDTO.setProduct(productMapper.productToProductDTO(stock.getProduct()));
+        stockDTO.setUpdateUserDescription(stock.getUpdateUser().getFirstName().concat(" ").concat(stock.getUpdateUser().getLastName()));
         return stockDTO;
     }
 

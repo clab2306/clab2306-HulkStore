@@ -1,0 +1,45 @@
+<form [formGroup]="crearForm">
+    <div class="container">
+      <div *ngIf="error" class="alert alert-danger">
+        {{error}}
+      </div>
+      <div *ngIf="mensajeExito" class="alert alert-success">
+        {{mensajeExito}}
+      </div>
+      <br>
+      <h3 class="text-center">Datos de la venta</h3>
+      <br>
+      <div class="form-group" [ngClass]="{'has-error':guardando && f.productId.errors}">
+        <label for="productId"><span>*</span>Producto</label>
+        <div>
+          <select class="form-control" required (ngModel)="products" formControlName="productId" id="productId" name="productId" (ngModelChange)="visualizarProducto()">
+            <option value="">Seleccione un producto</option>
+            <option *ngFor ="let productOption of products" [value]="productOption.id" ngDefaultControl>{{productOption.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div *ngIf="guardando && f.productId.errors" class="help-block">
+        <div *ngIf="f.productId.errors.required">
+          <h6 class="text-danger">Seleccione un producto.</h6>
+        </div>
+      </div>
+      <div class="alert-info" *ngIf="stock && stock.product">
+        Precio: {{stock.product.price | currency }}
+        Items disponibles: {{stock.amount}}
+      </div>
+      <div class="form-group" [ngClass]="{'has-error':guardando && f.amount.errors}">
+        <label><span>*</span>Cantidad: </label>
+        <input class="form-control" type="number" id="amount" name="amount" size="20" formControlName="amount" >
+      </div>
+      <div *ngIf="guardando && f.amount.errors" class="help-block">
+        <div *ngIf="f.amount.errors.required">
+          <h6 class="text-danger">Ingrese la cantidad.</h6>
+        </div>
+      </div>
+      <div class="text-center">
+          <button (click)="previousState()" class="btn btn-secondary" >Regresar</button>
+          <button (click)="crear()" class="btn btn-success" >Crear</button>
+      </div>
+    </div>
+  </form>
+  

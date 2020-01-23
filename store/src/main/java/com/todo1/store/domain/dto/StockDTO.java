@@ -23,6 +23,10 @@ public class StockDTO {
 
     private Long updateUserId;
 
+    private ProductDTO product;
+
+    private String updateUserDescription;
+
     public Long getId() {
         return id;
     }
@@ -61,6 +65,22 @@ public class StockDTO {
 
     public void setUpdateUserId(Long userId) {
         this.updateUserId = userId;
+    }
+
+    public ProductDTO getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductDTO product) {
+        this.product = product;
+    }
+
+    public String getUpdateUserDescription() {
+        return updateUserDescription;
+    }
+
+    public void setUpdateUserDescription(String updateUserDescription) {
+        this.updateUserDescription = updateUserDescription;
     }
 
 }

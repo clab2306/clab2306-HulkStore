@@ -77,11 +77,14 @@ public class StockServiceImpl implements StockService {
             .map(stockMapper::stockToStockDTO);
     }
 
-    /**
-     * Eliminar stock por id.
-     *
-     * @param id id stock
-     */
+    @Override
+    @Transactional(readOnly = true)
+    public StockDTO findByProductId(Long productId) {
+        log.debug("Solicitud para obtener Stock por producto : {}", productId);
+        Stock stock = stockRepository.findByProduct_Id(productId);
+        return stockMapper.stockToStockDTO(stock);
+    }
+
     @Override
     public void delete(Long id) {
         log.debug("Solicitud para eliminar Stock : {}", id);

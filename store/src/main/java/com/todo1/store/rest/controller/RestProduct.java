@@ -2,12 +2,17 @@ package com.todo1.store.rest.controller;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +27,7 @@ import com.todo1.store.domain.dto.ProductDTO;
 import com.todo1.store.domain.service.ProductService;
 import com.todo1.store.rest.error.BadRequestAlertException;
 import com.todo1.store.rest.util.HeaderUtil;
+import com.todo1.store.rest.util.PaginationUtil;
 
 /**
  * REST controller para gestionar Producto.
@@ -62,6 +68,13 @@ public class RestProduct {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, productDTO.getId().toString()))
             .body(result);
+    }
+
+    @GetMapping("/products")
+    public ResponseEntity<List<ProductDTO>> getAllProducts(Pageable pageable) {
+        final Page<ProductDTO> page = productService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     @GetMapping("/products/{id}")

@@ -20,7 +20,7 @@ public class PurchaseDTO {
     @NotNull
     private Instant purchaseDate;
 
-    private Set<ProductPurchaseDTO> products;
+    private Set<ProductPurchaseDTO> productPurchases;
 
     private Long userId;
 
@@ -56,12 +56,12 @@ public class PurchaseDTO {
         this.userId = userId;
     }
 
-    public Set<ProductPurchaseDTO> getProducts() {
-        return products;
+    public Set<ProductPurchaseDTO> getProductPurchases() {
+        return productPurchases;
     }
 
-    public void setProducts(Set<ProductPurchaseDTO> products) {
-        this.products = products;
+    public void setProductPurchases(Set<ProductPurchaseDTO> products) {
+        this.productPurchases = products;
     }
 
 

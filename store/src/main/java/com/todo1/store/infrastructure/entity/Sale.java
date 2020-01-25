@@ -27,96 +27,97 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "sale")
 public class Sale implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-	@SequenceGenerator(name = "sequenceGenerator")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    private Long id;
 
-	@NotNull
-	@Column(name = "total", nullable = false)
-	private Long total;
+    @NotNull
+    @Column(name = "total", nullable = false)
+    private Long total;
 
-	@NotNull
-	@Column(name = "sale_date", nullable = false)
-	private Instant saleDate;
+    @NotNull
+    @Column(name = "sale_date", nullable = false)
+    private Instant saleDate;
 
-	@OneToMany(mappedBy = "sale")
-	private Set<ProductSale> productSales = new HashSet<>();
-	@ManyToOne
-	@JsonIgnoreProperties("sales")
-	private User user;
+    @ManyToOne
+    @JsonIgnoreProperties("sales")
+    private User user;
 
-	public Long getId() {
-		return id;
-	}
+    @OneToMany(mappedBy = "sale")
+    private Set<ProductSale> productSales = new HashSet<>();
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Long getTotal() {
-		return total;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Sale total(Long total) {
-		this.total = total;
-		return this;
-	}
+    public Long getTotal() {
+        return total;
+    }
 
-	public void setTotal(Long total) {
-		this.total = total;
-	}
+    public Sale total(Long total) {
+        this.total = total;
+        return this;
+    }
 
-	public Instant getSaleDate() {
-		return saleDate;
-	}
+    public void setTotal(Long total) {
+        this.total = total;
+    }
 
-	public Sale saleDate(Instant saleDate) {
-		this.saleDate = saleDate;
-		return this;
-	}
+    public Instant getSaleDate() {
+        return saleDate;
+    }
 
-	public void setSaleDate(Instant saleDate) {
-		this.saleDate = saleDate;
-	}
+    public Sale saleDate(Instant saleDate) {
+        this.saleDate = saleDate;
+        return this;
+    }
 
-	public Set<ProductSale> getProductSales() {
-		return productSales;
-	}
+    public void setSaleDate(Instant saleDate) {
+        this.saleDate = saleDate;
+    }
 
-	public Sale productSales(Set<ProductSale> productSales) {
-		this.productSales = productSales;
-		return this;
-	}
+    public Set<ProductSale> getProductSales() {
+        return productSales;
+    }
 
-	public Sale addProductSale(ProductSale productSale) {
-		this.productSales.add(productSale);
-		productSale.setSale(this);
-		return this;
-	}
+    public Sale productSales(Set<ProductSale> productSales) {
+        this.productSales = productSales;
+        return this;
+    }
 
-	public Sale removeProductSale(ProductSale productSale) {
-		this.productSales.remove(productSale);
-		productSale.setSale(null);
-		return this;
-	}
+    public Sale addProductSale(ProductSale productSale) {
+        this.productSales.add(productSale);
+        productSale.setSale(this);
+        return this;
+    }
 
-	public void setProductSales(Set<ProductSale> productSales) {
-		this.productSales = productSales;
-	}
+    public Sale removeProductSale(ProductSale productSale) {
+        this.productSales.remove(productSale);
+        productSale.setSale(null);
+        return this;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public void setProductSales(Set<ProductSale> productSales) {
+        this.productSales = productSales;
+    }
 
-	public Sale user(User user) {
-		this.user = user;
-		return this;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public Sale user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

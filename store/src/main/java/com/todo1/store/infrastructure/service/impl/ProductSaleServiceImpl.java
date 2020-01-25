@@ -43,7 +43,7 @@ public class ProductSaleServiceImpl implements ProductSaleService {
         log.debug("Solicitud para guardar ProductSale : {}", productSaleDTO);
         ProductSale productSale = productSaleMapper.productSaleDTOToProductSale(productSaleDTO);
         productSale = productSaleRepository.save(productSale);
-        return productSaleMapper.productToProductDTO(productSale);
+        return productSaleMapper.productSaleToProductSaleDTO(productSale);
     }
 
     /**
@@ -70,7 +70,7 @@ public class ProductSaleServiceImpl implements ProductSaleService {
     public Optional<ProductSaleDTO> findOne(Long id) {
         log.debug("Solicitud para obtener ProductSale : {}", id);
         return productSaleRepository.findById(id)
-            .map(productSaleMapper::productToProductDTO);
+            .map(productSaleMapper::productSaleToProductSaleDTO);
     }
 
     /**

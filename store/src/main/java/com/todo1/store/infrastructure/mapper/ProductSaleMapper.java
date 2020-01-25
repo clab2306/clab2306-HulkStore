@@ -18,11 +18,11 @@ public class ProductSaleMapper {
     public List<ProductSaleDTO> productsSaleToProductSaleDTOs(List<ProductSale> productsSale) {
         return productsSale.stream()
             .filter(Objects::nonNull)
-            .map(this::productToProductDTO)
+            .map(this::productSaleToProductSaleDTO)
             .collect(Collectors.toList());
     }
 
-    public ProductSaleDTO productToProductDTO(ProductSale productSale) {
+    public ProductSaleDTO productSaleToProductSaleDTO(ProductSale productSale) {
         ProductSaleDTO productSaleDTO = new ProductSaleDTO();
     	productSaleDTO.setId(productSale.getId());
     	productSaleDTO.setProductId(productSale.getProduct().getId());

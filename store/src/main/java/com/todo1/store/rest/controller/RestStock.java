@@ -33,15 +33,15 @@ import com.todo1.store.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class StockResource {
+public class RestStock {
 
-    private final Logger log = LoggerFactory.getLogger(StockResource.class);
+    private final Logger log = LoggerFactory.getLogger(RestStock.class);
 
     private static final String ENTITY_NAME = "stock";
 
     private final StockService stockService;
 
-    public StockResource(StockService stockService) {
+    public RestStock(StockService stockService) {
         this.stockService = stockService;
     }
 

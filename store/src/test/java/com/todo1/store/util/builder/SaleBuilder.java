@@ -4,9 +4,9 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.todo1.store.infrastructure.entity.ProductSale;
-import com.todo1.store.infrastructure.entity.Sale;
-import com.todo1.store.infrastructure.entity.User;
+import com.todo1.store.model.entity.ProductSale;
+import com.todo1.store.model.entity.Sale;
+import com.todo1.store.model.entity.User;
 
 public class SaleBuilder {
 

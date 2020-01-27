@@ -1,8 +1,8 @@
 package com.todo1.store.util.builder;
 
-import com.todo1.store.infrastructure.entity.Product;
-import com.todo1.store.infrastructure.entity.ProductSale;
-import com.todo1.store.infrastructure.entity.Sale;
+import com.todo1.store.model.entity.Product;
+import com.todo1.store.model.entity.ProductSale;
+import com.todo1.store.model.entity.Sale;
 
 public class ProductSaleBuilder {
 

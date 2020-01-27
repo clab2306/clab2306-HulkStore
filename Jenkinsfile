@@ -84,7 +84,7 @@ pipeline{
 				}
 				steps{
 					withSonarQubeEnv('Sonar') {
-						sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.todo1: Store
+						sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=Store
 						-Dsonar.projectName=Hulk-Store
 						-Dproject.settings=sonar-project.properties"
 				}
